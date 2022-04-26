@@ -1,12 +1,15 @@
 <?php
 require 'httpClient.php';
 
-$source=new httpClient();
+$source=new httpClient([ //optional cookies
+   "var1=value1;var2=value2;domain=domain1.name",
+   "var1=value1;var2=value2;domain=domain1.name"
+  ]);
 //$source->debug=true;
 $source->hashName='crc32b'; //optional hash of content
 //$source->uAgent=''; //optional user-agent string
-//$source->setCookies("var1=value1;var2=value2;domain=domain1.name"); //optional cookies
-//$source->setCookies("var1=value1;var2=value2;domain=domain2.name"); //additional cookies
+//$source->setCookies("var1=value1;var2=value2;domain=domain3.name"); //additional cookies
+$source->maxRedirects=0;//disable redirects if need, default up to 5 redirects per request
 
 $source->get('https://google.com/');
 $content=$source->getContent(); //get content in variable
